@@ -226,6 +226,31 @@ Effect 4, Roshni chhoone par, and effect 7, real refraction, are excluded from e
 - The only colour exception is Colour ki jhalak, which may use the lead's semantic status colour and must remain subtle.
 - Never let an effect obscure status text, follow-up details, controls, or destructive-action warnings.
 
+## 8. Other Animations
+
+These are interaction and workflow animations, separate from GlassKit visual effects:
+
+| Location | Animation | Timing |
+| --- | --- | --- |
+| Morning notification | Falls gently from top to bottom. | `700 ms` |
+| Aaj list | Rows lift upward one by one. | `120 ms` stagger gap |
+| Forgotten lead dot | Soft red pulse. | `1600 ms` loop |
+| "Ho gaya" completion | Row slides sideways and leaves while the count decreases. | `500 ms` |
+| Buttons | Slight press-in scale on touch. | `150 ms` |
+| Screen change | Fade with a small upward movement. | `350 ms` |
+| Post-call card | Rises from the bottom as a sheet. | `450 ms` |
+| Excel import | Progress bar, then a success tick pop. | `500 ms` |
+| Light/Dark change | Colours transition softly. | `500 ms` |
+| All work complete | Small confetti celebration. | Later, opt-in only |
+
+Animation rules:
+
+- Disable all of these animations when `Reduce motion` / `prefers-reduced-motion` is enabled, except for an instant state change that is required to understand completion.
+- Keep the forgotten-lead pulse red because it communicates forgotten/danger status; all other decorative motion stays monochrome.
+- Animate opacity and transforms rather than layout-heavy properties so the Android UI remains responsive.
+- Do not delay saving, navigation, call actions, import completion, or follow-up updates while an animation is running.
+- The confetti celebration is not part of the initial release and must not become a dependency of completing work.
+
 ## Verification Checklist
 
 1. `npm install`
