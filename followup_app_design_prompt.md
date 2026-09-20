@@ -311,3 +311,26 @@ Permission and privacy rules:
 10. Check obvious rerender and localStorage performance issues.
 11. Rebuild `siyaram-crm-final-source-2026-09-20.zip` because the GitHub workflow builds from that archive.
 12. Commit and push the updated archive to `main`.
+
+## 16. Next Steps
+
+### Sec. 2.2 Decisions
+
+The current master prompt does not contain the five Sec. 2.2 questions, so answers to #1-#5 cannot be determined without guessing. Add the missing Sec. 2.2 text before treating those decisions as final. The decisions already fixed by this prompt are:
+
+- Default button treatment: Crystal.
+- Default GlassKit preset: Standard.
+- Theme choices: Light, Dark, and Phone; Phone follows the device setting.
+- Lead phone uniqueness: last 10 canonical digits.
+- Lead removal: reversible archive, never hard delete.
+
+### Builder Handoff
+
+Give the builder these four files together:
+
+1. `followup_app_design_prompt.md` (master framework)
+2. `builder_stage_a_navigation.md`
+3. `builder_stage_a_visuals.md`
+4. `builder_stage_a_data.md`
+
+Do not implement unresolved Sec. 2.2 decisions by assumption. The builder must return the Stage A test results and state any remaining decision blockers.
