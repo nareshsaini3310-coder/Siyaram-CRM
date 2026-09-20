@@ -150,6 +150,26 @@ Use these exact neutral tokens for borders and supporting surfaces:
 
 Lead status colours are semantic exceptions and may be defined separately for dot, avatar, chip, and pipeline-bar states. Red must use `--danger` and remain reserved for forgotten/overdue, error, danger, and red lead status.
 
+### 6.4 Status Colours
+
+Use status colour only to communicate lead meaning. Pair every dot, avatar tint, chip, and pipeline bar with its written status name. Never rely on colour alone.
+
+| Status colour | Hex | Meaning |
+| --- | --- | --- |
+| Orange | `#EF9F27` | Warm |
+| Purple | `#7F77DD` | Site visit confirmed |
+| Red | `#E24B4A` | Closing |
+| Grey | `#888780` | Not interested |
+| Green | `#639922` | Deal tay karega |
+| Yellow, Blue, Pink, Golden | Use only when an explicit status is assigned | Deal dega / Deal tay karega, according to the configured status label |
+
+Status rules:
+
+- Always show the status name next to or inside the status chip; colour is never the only signal.
+- Keep status text readable in both Light and Dark modes with sufficient contrast.
+- Red `#E24B4A` is a semantic `Closing` status exception to the general danger rule. Use it nowhere else except danger, forgotten/overdue, errors, and destructive warnings.
+- Do not add new colours for decoration or use a status colour as a generic button, navigation, or background accent.
+
 ## Verification Checklist
 
 1. `npm install`
