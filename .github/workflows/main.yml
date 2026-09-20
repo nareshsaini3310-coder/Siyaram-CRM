@@ -1,0 +1,61 @@
+name: Siyaram Android APK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-apk:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Extract Siyaram source
+        run: |
+          set -e
+          test -f siyaram-crm-final-source-2026-09-20.zip
+          rm -rf source
+          mkdir source
+          unzip -q siyaram-crm-final-source-2026-09-20.zip -d source
+          test -f source/package.json
+          test -f source/android/app/build.gradle
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+          cache-dependency-path: source/package-lock.json
+
+      - name: Install dependencies
+        working-directory: source
+        run: npm ci --no-audit --no-fund
+
+      - name: Build Android web assets
+        working-directory: source
+        run: npm run build:android
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.10.2'
+
+      - name: Build APK
+        working-directory: source/android
+        run: gradle assembleDebug --no-daemon
+
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: siyaram-debug-apk
+          path: source/android/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
