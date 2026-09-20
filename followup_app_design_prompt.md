@@ -4,7 +4,7 @@ Design and implement the next Siyaram CRM experience inside the existing React a
 
 ## Product Shape
 
-The app is a fast, mobile-first real-estate CRM for daily follow-up work. Preserve the existing Siyaram blue/violet liquid-glass visual language. Do not bring back the old gold/amber branding. Keep the interface practical, touch-friendly, and optimized for repeated sales actions.
+The app is a fast, mobile-first real-estate CRM for daily follow-up work. Use the Siyaram monochrome liquid-glass visual language described below. Do not bring back blue, violet, gold, or amber branding. Keep the interface practical, touch-friendly, and optimized for repeated sales actions.
 
 ## Primary Navigation
 
@@ -103,6 +103,39 @@ The import flow must be deterministic and must not guess:
 - Keep destructive actions visually clear but not easy to trigger accidentally.
 - Maintain responsive layouts for Android phone, tablet, and desktop.
 - Do not introduce blue/purple or gold/amber branding, generic dashboard filler, or decorative UI that competes with the daily work queue.
+
+### 6.2 Button Design Options
+
+Choose exactly one button treatment for the product. The default is **Option 1: Crystal**.
+
+| Option | Name | Key characteristic | Best for |
+| --- | --- | --- | --- |
+| 1 | **Crystal** | Solid black/white button with a thin, bright neutral edge. | Clearest reading and strongest Android reliability. **Default.** |
+| 2 | **Mist** | More blurred glass, larger rounded corners, and soft grey contrast. | The calmest, quietest interface. |
+| 3 | **Glass button** | Translucent glass button with a subtle light reflection along the edge. | The most Apple-like treatment; slightly lighter on Android. |
+
+Button option rules:
+
+- Keep button text and icons black, white, or grey only.
+- Do not use a coloured glow, coloured border, or coloured active fill.
+- Keep destructive buttons red only when they represent a destructive action.
+- Keep the selected option consistent across bottom navigation, primary actions, cards, dialogs, and sheets.
+
+### Exact Colour Tokens
+
+Use these exact neutral tokens for the shell and buttons:
+
+- `--ink: #111111`
+- `--paper: #FFFFFF`
+- `--grey-50: #F7F7F7`
+- `--grey-100: #EEEEEE`
+- `--grey-300: #D1D1D1`
+- `--grey-500: #777777`
+- `--grey-700: #444444`
+- `--grey-900: #222222`
+- `--danger: #C62828`
+
+Lead status colours are semantic exceptions and may be defined separately for dot, avatar, chip, and pipeline-bar states. Red must use `--danger` and remain reserved for forgotten/overdue, error, danger, and red lead status.
 
 ## Verification Checklist
 
