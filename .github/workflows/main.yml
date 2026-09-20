@@ -27,9 +27,20 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
+          cache: npm
+          cache-dependency-path: source/package-lock.json
+
       - name: Install dependencies
         working-directory: source
-        run: npm install --no-audit --no-fund
+        run: |
+          set -e
+          if [ -f package-lock.json ]; then
+            npm ci --no-audit --no-fund
+          else
+            npm install --no-audit --no-fund --include=dev
+          fi
+          npm rebuild esbuild
+          test -f node_modules/vite/dist/node/cli.js
 
       - name: Build Android web assets
         working-directory: source
