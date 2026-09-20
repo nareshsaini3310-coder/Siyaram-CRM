@@ -121,18 +121,31 @@ Button option rules:
 - Keep destructive buttons red only when they represent a destructive action.
 - Keep the selected option consistent across bottom navigation, primary actions, cards, dialogs, and sheets.
 
-### Exact Colour Tokens
+### 6.3 Crystal Colour Tokens
 
-Use these exact neutral tokens for the shell and buttons:
+Option 1 is the default. Use these exact values for the Crystal treatment:
 
-- `--ink: #111111`
+| Token | Light | Dark |
+| --- | --- | --- |
+| Background | `#F7F7F8` | `#000000` |
+| Text | `#0A0A0A` | `#FFFFFF` |
+| Secondary text | `#6B6B70` | `#9A9AA0` |
+| Button | `#0A0A0A` with white text | `#FFFFFF` with black text |
+| Glass fill | White at 55% opacity | White at 8% opacity |
+| Success tick | `#1D9E75` | `#5DCAA5` |
+
+Use these exact neutral tokens for borders and supporting surfaces:
+
+- `--ink: #0A0A0A`
 - `--paper: #FFFFFF`
-- `--grey-50: #F7F7F7`
-- `--grey-100: #EEEEEE`
-- `--grey-300: #D1D1D1`
-- `--grey-500: #777777`
-- `--grey-700: #444444`
-- `--grey-900: #222222`
+- `--background-light: #F7F7F8`
+- `--background-dark: #000000`
+- `--secondary-light: #6B6B70`
+- `--secondary-dark: #9A9AA0`
+- `--glass-light: rgba(255, 255, 255, 0.55)`
+- `--glass-dark: rgba(255, 255, 255, 0.08)`
+- `--success-light: #1D9E75`
+- `--success-dark: #5DCAA5`
 - `--danger: #C62828`
 
 Lead status colours are semantic exceptions and may be defined separately for dot, avatar, chip, and pipeline-bar states. Red must use `--danger` and remain reserved for forgotten/overdue, error, danger, and red lead status.
