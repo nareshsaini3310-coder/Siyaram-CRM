@@ -63,7 +63,7 @@ The import flow must be deterministic and must not guess:
 
 ## Safety And Data Integrity
 
-- Client delete requires a confirmation dialog and must remove client-project links, follow-ups, communication logs, recordings, and stale references safely.
+- Lead removal requires a confirmation dialog and archives the lead; leads must never be hard-deleted. Archived leads must retain their history and be restorable.
 - Project delete requires a confirmation dialog and must clean client links, project recordings, follow-up references, communication references, documents, floor maps, contacts, features, and milestones safely.
 - Do not hide errors with an error boundary. Fix root causes.
 - Never use Reset Data as a workaround.
@@ -251,6 +251,29 @@ Animation rules:
 - Do not delay saving, navigation, call actions, import completion, or follow-up updates while an animation is running.
 - The confetti celebration is not part of the initial release and must not become a dependency of completing work.
 
+## 9. Data: Room Database
+
+Use a Room database for the Android data layer. Keep the schema migration-safe and preserve backup/restore compatibility.
+
+| Table | Stores |
+| --- | --- |
+| **Project** | Name, type (`Plots`, `Floors`, or `High-rise`), and project metadata. |
+| **Lead** | Name, clean phone number, project link, semantic colour/status, budget, size, source, last contact, next follow-up, `pichhli baar`, `agli baar`, and archive state. |
+| **Colour** | Display name, exact hex value, and follow-up day rule. |
+| **Interaction** | Timeline entries for call, WhatsApp, visit, note, and import. |
+| **Visit** | Date, time, location, and status. |
+| **Template** | Project-specific WhatsApp message templates. |
+| **Setting** | Notification time, theme mode, GlassKit effects preset, and forgotten-lead day threshold. |
+
+Data rules:
+
+- Store the phone in a clean canonical form and enforce one Lead per phone's last 10 digits.
+- Importing a duplicate number updates or links to the existing Lead; it must never create a second Lead.
+- A Lead is archived, not deleted. Preserve its interactions, visits, project links, notes, and import history; provide restore and archived filtering.
+- Project deletion may still require confirmation and must clean project references without deleting unrelated Lead history.
+- Use Room migrations for schema changes. Never reset the database as a migration strategy.
+- Keep sensitive data local by default and include archive state, Room version, and all linked records in backup/restore validation.
+
 ## Verification Checklist
 
 1. `npm install`
@@ -258,7 +281,7 @@ Animation rules:
 3. `npm run build:android`
 4. Validate Android source and generated assets.
 5. Check React hook order on Client Profile, Client List, Dashboard, and Project Detail.
-6. Verify client delete confirmation and data cleanup.
+6. Verify lead archive confirmation, history retention, restore, and archived filtering.
 7. Verify project delete confirmation and data cleanup.
 8. Verify Excel import normalization, deduplication, update/create, project matching, and summary.
 9. Verify profile creation/update and follow-up creation.
