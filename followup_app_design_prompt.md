@@ -274,6 +274,29 @@ Data rules:
 - Use Room migrations for schema changes. Never reset the database as a migration strategy.
 - Keep sensitive data local by default and include archive state, Room version, and all linked records in backup/restore validation.
 
+## 10. Permissions And Privacy
+
+Request permissions only when the feature needs them, and explain the reason in a clear Hinglish screen before showing the Android permission dialog.
+
+| Permission | When | Why |
+| --- | --- | --- |
+| Notifications | First use, before the first reminder is scheduled. | Subah ki notification. |
+| Call log, Contacts, Phone state | Stage B, immediately before call-related functionality. | Sadharan dialer ke calls. |
+| Exact alarm or WorkManager | Stage B, when the user enables a fixed morning reminder. | Subah ka pakka time. |
+| Boot complete | Stage B, when reminders are enabled. | Phone restart ke baad bhi reminder. |
+| Notification access | Only if the broker explicitly chooses it. | WhatsApp ke aane wale messages. |
+
+Permission and privacy rules:
+
+- Do not request storage permission for Excel import. Use the system file picker.
+- Before every permission request, show a plain-language Hinglish explanation with Allow and Not now choices.
+- If a permission is denied, the app must continue to work. Disable only the dependent feature and show a useful retry path in Settings.
+- The first screen must state exactly: `Aapka data sirf aapke phone mein hai.`
+- Do not upload client data by default. Any sharing of client data with other brokers in Stage D requires explicit consent and a privacy/legal review under the DPDP Act before implementation.
+- Treat notification access as optional, off by default, and revocable from Settings.
+- Android and Play Store call-log restrictions must be respected. The distribution plan is direct APK installation unless the app qualifies for the applicable Play Store policy exception.
+- Never describe a permission as mandatory when the core CRM can operate without it.
+
 ## Verification Checklist
 
 1. `npm install`
