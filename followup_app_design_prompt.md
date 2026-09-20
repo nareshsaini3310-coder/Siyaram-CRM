@@ -170,6 +170,17 @@ Status rules:
 - Red `#E24B4A` is a semantic `Closing` status exception to the general danger rule. Use it nowhere else except danger, forgotten/overdue, errors, and destructive warnings.
 - Do not add new colours for decoration or use a status colour as a generic button, navigation, or background accent.
 
+### 6.5 Glass Rules
+
+- Place three soft grey/silver orbs behind the interface. Keep their positions consistent across every screen so the product has one stable visual atmosphere.
+- Prefer a free, real backdrop-blur library such as Haze when it is compatible with the Android build. If real backdrop blur is not available or reliable, use a translucent surface card instead; do not fake blur with a coloured gradient.
+- The builder must add one short implementation note stating which approach was used: real backdrop blur library and version, or translucent-card fallback and why.
+- Use these corner radii: button `16 dp`, chip `14 dp`, tag `10 dp`, and bottom sheet top corners `26 dp`.
+- Use `14 dp` screen-edge padding and `10 dp` spacing between cards.
+- Use the phone's native font family. Limit weights to Regular and SemiBold.
+- Never use text smaller than `12 sp` on the phone UI.
+- Every button and primary touch action must provide at least a `48 dp` touch target, even when the visible icon or label is smaller.
+
 ## Verification Checklist
 
 1. `npm install`
