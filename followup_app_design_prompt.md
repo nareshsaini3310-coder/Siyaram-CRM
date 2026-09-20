@@ -181,6 +181,29 @@ Status rules:
 - Never use text smaller than `12 sp` on the phone UI.
 - Every button and primary touch action must provide at least a `48 dp` touch target, even when the visible icon or label is smaller.
 
+### 6.6 GlassKit Effects
+
+Implement GlassKit as one settings switch that turns the six lightweight glass effects on or off together. The setting must persist across launches, default to on only when the device can handle it comfortably, and degrade gracefully on Android.
+
+| # | Effect | What it does | Android difficulty | Phone load |
+| --- | --- | --- | --- | --- |
+| 1 | **Behte orbs** | The three background orbs move slowly and gently. | Easy | Light |
+| 2 | **Chamak ki lehar** | An occasional soft light band passes across cards. | Easy | Light |
+| 3 | **Behta tab** | The active glass bottom-nav button floats between tabs and compresses slightly. | Easy | Light |
+| 4 | **Roshni chhoone par** | Light follows the finger and the active large card tilts slightly. | Slightly difficult | Medium |
+| 5 | **Colour ki jhalak** | A lead card receives a very subtle glow from its semantic status colour. | Easy | Light |
+| 6 | **Halka grain** | A very subtle grain texture makes the glass feel physical. | Easy | Light |
+
+GlassKit rules:
+
+- Provide one clear GlassKit on/off control in Settings, with the current state written beside the switch.
+- Keep all six effects disabled when the user turns GlassKit off; no effect may continue running invisibly in the background.
+- Respect `prefers-reduced-motion` and reduce or disable movement, tilt, and shimmer automatically.
+- Pause animation when the app is backgrounded or the screen is not visible.
+- Use transform and opacity animations where possible; avoid expensive continuous layout, blur, or canvas work.
+- Keep effect timing slow, soft, and non-distracting. Effects must never reduce text contrast or interfere with calls, forms, lists, or buttons.
+- **Later, opt-in only:** real refraction, where the background bends around glass edges. This is the most difficult effect, requires an Android 13+ shader path, and is heavy on battery/performance. Do not ship it as part of the default six-effect GlassKit switch.
+
 ## Verification Checklist
 
 1. `npm install`
