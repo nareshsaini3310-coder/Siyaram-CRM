@@ -89,13 +89,20 @@ The import flow must be deterministic and must not guess:
 
 ## Visual Direction
 
-- Preserve the existing blue/violet liquid-glass design.
+- Support exactly three appearance modes: `Light`, `Dark`, and `Phone`.
+- `Phone` follows the operating system colour-scheme setting automatically.
+- Expose the three choices in Settings as a clear Light / Dark / Phone control.
+- Use a 500 ms soft colour transition when the appearance mode changes.
+- The application shell uses only white, black, and grey tones. Do not use blue, violet, green, amber, orange, or other accent colours for decoration, navigation, backgrounds, borders, buttons, or active states.
+- Colour is reserved for lead status meaning only: status dots, lead avatars, status chips, and pipeline bars may use semantic status colours.
+- Red is reserved exclusively for Danger, forgotten/overdue leads, errors, destructive warnings, and red lead status. Never use red as a general accent.
+- Status colours must communicate state rather than decorate the interface. Keep their labels and contrast accessible in both Light and Dark modes.
 - Use floating glass navigation with readable active states and badges.
 - Keep cards compact and scannable on mobile.
 - Use icons inside icon actions and tooltips for unfamiliar icons.
 - Keep destructive actions visually clear but not easy to trigger accidentally.
 - Maintain responsive layouts for Android phone, tablet, and desktop.
-- Do not introduce gold/amber branding, generic dashboard filler, or decorative UI that competes with the daily work queue.
+- Do not introduce blue/purple or gold/amber branding, generic dashboard filler, or decorative UI that competes with the daily work queue.
 
 ## Verification Checklist
 
