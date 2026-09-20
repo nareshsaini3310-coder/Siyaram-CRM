@@ -183,7 +183,7 @@ Status rules:
 
 ### 6.6 GlassKit Effects
 
-Implement GlassKit as one settings switch that turns the six lightweight glass effects on or off together. The setting must persist across launches, default to on only when the device can handle it comfortably, and degrade gracefully on Android.
+Implement GlassKit as one persisted Settings control with three mutually exclusive presets. The setting must default to `Standard`, remember the user's choice across launches, and degrade gracefully on Android.
 
 | # | Effect | What it does | Android difficulty | Phone load |
 | --- | --- | --- | --- | --- |
@@ -196,13 +196,25 @@ Implement GlassKit as one settings switch that turns the six lightweight glass e
 
 GlassKit rules:
 
-- Provide one clear GlassKit on/off control in Settings, with the current state written beside the switch.
-- Keep all six effects disabled when the user turns GlassKit off; no effect may continue running invisibly in the background.
+- Provide one clear GlassKit preset control in Settings, with the current preset written beside it.
+- Keep all effects disabled in the `Minimal` preset; no effect may continue running invisibly in the background.
 - Respect `prefers-reduced-motion` and reduce or disable movement, tilt, and shimmer automatically.
 - Pause animation when the app is backgrounded or the screen is not visible.
 - Use transform and opacity animations where possible; avoid expensive continuous layout, blur, or canvas work.
 - Keep effect timing slow, soft, and non-distracting. Effects must never reduce text contrast or interfere with calls, forms, lists, or buttons.
 - **Later, opt-in only:** real refraction, where the background bends around glass edges. This is the most difficult effect, requires an Android 13+ shader path, and is heavy on battery/performance. Do not ship it as part of the default six-effect GlassKit switch.
+
+### 7.1 GlassKit Presets
+
+Choose exactly one preset. `Standard` is the default.
+
+| Preset | Effects enabled | Use when |
+| --- | --- | --- |
+| **Minimal** | No effects; plain glass only. | Fastest mode and safest for older phones. |
+| **Standard** | Behta tab, slow Chamak ki lehar, and Colour ki jhalak. | Best overall balance. **Default.** |
+| **Full** | Standard plus very slow Behte orbs and Halka grain. | Newer phones only. |
+
+Effect 4, Roshni chhoone par, and effect 7, real refraction, are excluded from every preset. They must be evaluated later as separate opt-in experiments.
 
 ## Verification Checklist
 
