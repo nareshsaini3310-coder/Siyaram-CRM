@@ -216,6 +216,16 @@ Choose exactly one preset. `Standard` is the default.
 
 Effect 4, Roshni chhoone par, and effect 7, real refraction, are excluded from every preset. They must be evaluated later as separate opt-in experiments.
 
+### 7.2 Effect Rules
+
+- When the phone's `Reduce motion` / `prefers-reduced-motion` setting is enabled, disable every GlassKit effect, including static grain, shimmer, orb movement, tab motion, tilt, and status glow.
+- Pause all loops, including Behte orbs and Chamak ki lehar, when the screen is off, the document is hidden, or the app moves to the background. Resume only when the app is visible again and the selected preset allows the effect.
+- If the phone begins to lag, reduce backdrop blur first. If lag continues, disable GlassKit effects automatically and fall back to plain translucent surfaces. Follow-up work, calls, forms, notifications, and data saving must never stop because of visual effects.
+- Settings must expose one switch labelled exactly: `Effects: Minimal / Standard / Full`.
+- Effects may use only white and grey for their own light, glow, shimmer, grain, and blur. No effect may introduce colour for decoration.
+- The only colour exception is Colour ki jhalak, which may use the lead's semantic status colour and must remain subtle.
+- Never let an effect obscure status text, follow-up details, controls, or destructive-action warnings.
+
 ## Verification Checklist
 
 1. `npm install`
